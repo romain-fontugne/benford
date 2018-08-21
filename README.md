@@ -24,5 +24,13 @@ The following command
 » python benford.py data/cable_capacity_greg.csv
 ```
 produces these two figures:
-- The frequency of the leading digits in the dataset: https://github.com/romain-fontugne/benford/blob/master/cable_capacity_greg.pdf
+- The frequency of the leading digits in the dataset:
+
+<object data="https://github.com/romain-fontugne/benford/blob/master/cable_capacity_greg.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="https://github.com/romain-fontugne/benford/blob/master/cable_capacity_greg.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="https://github.com/romain-fontugne/benford/blob/master/cable_capacity_greg.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
+
+
 - The distribution of the dataset: https://github.com/romain-fontugne/benford/blob/master/cable_capacity_greg_raw.pdf
