@@ -17,7 +17,7 @@ The given dataset should be a one-column file with no headers. For example:
 1.0
 ```
 
-#usage
+# Usage
 The following command
 
 ```
