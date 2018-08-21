@@ -23,33 +23,38 @@ class Benford(object):
 
         prefixes = ["0", ".", "-"]
         x_str = str(float(x))
-        while x_str[0] in prefixes:
-            x_str = x_str[1:]
+        try:
+            while x_str[0] in prefixes:
+                x_str = x_str[1:]
 
-        first = int(x_str[0])
-        return first
+            first = int(x_str[0])
+            return first
+        except:
+            # print("Problem with {}".format(x))
+            return np.nan
 
 
     def convert_dataset(self):
         """Convert the dataset to its first digit equivalent."""
     
         self.data_first_digit = self.data.applymap(self.first_digit) 
+        self.data_first_digit = self.data_first_digit.dropna()
 
-    def plot_theory_hist(self, fig=None):
+    def plot_theory_hist(self, fig=None, label="theory"):
 
         x = range(1,10)
         benford_probability = [np.log10(1+1/xx) for xx in x ]
         plt.figure(fig)
-        plt.plot(x, benford_probability)
+        plt.plot(x, benford_probability, label=label)
 
 
-    def plot_first_digit_hist(self, title=None, fig=None):
+    def plot_first_digit_hist(self, title=None, fig=None, label="data"):
 
         data = self.data_first_digit
         
         fig, ax = plt.subplots(num=fig)
         data.hist(bins=np.arange(0.5, 10, 1), ax=ax,
-            density=True, stacked=True, align="mid") #, histtype="step"  )
+            density=True, stacked=True, align="mid", label=label) #, histtype="step"  )
         plt.xticks(range(1,10))
         plt.xlim([0,10])
         plt.xlabel("First Digit")
@@ -84,9 +89,10 @@ if __name__ == "__main__":
     plt.figure(fig)
     ben.plot_first_digit_hist(fig=fig, title=title)
     ben.plot_theory_hist(fig=fig)
+    plt.legend()
     plt.tight_layout()
     plt.savefig(title+".pdf")
 
-    ben.plot_raw_data_hist()
+    ben.plot_raw_data_hist(title=title)
     plt.tight_layout()
     plt.savefig(title+"_raw.pdf")
